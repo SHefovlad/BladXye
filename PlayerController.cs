@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     float jumpForce;
     public float jumpSpeed;
     public float jumpMinusSpeed;
+    public int jumpTime;
     [SerializeField] float moveSpeed;
     void Start()
     {
@@ -41,7 +42,7 @@ public class PlayerController : MonoBehaviour
         canJump = false;
         int c = 0;
         jumpForce = jumpSpeed;
-        while (c / 60 < 3)
+        while (c < jumpTime)
         {
             c++;
             jumpForce -= jumpMinusSpeed;
