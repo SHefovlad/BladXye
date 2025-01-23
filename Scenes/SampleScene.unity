@@ -386,6 +386,7 @@ GameObject:
   - component: {fileID: 595582594}
   - component: {fileID: 595582593}
   - component: {fileID: 595582592}
+  - component: {fileID: 595582597}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -405,11 +406,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2321f81e34cc5d94fbc892ec2071e87d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canJump: 1
-  jumpSpeed: 5
+  canJump: 0
+  jumpSpeed: 0
   jumpMinusSpeed: 0
-  jumpTime: 60
-  moveSpeed: 300
+  jumpTime: 0
+  moveSpeed: 100
 --- !u!50 &595582593
 Rigidbody2D:
   serializedVersion: 4
@@ -422,8 +423,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 40
+  m_Mass: 10
+  m_LinearDrag: 10
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -433,7 +434,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -550,6 +551,19 @@ Transform:
   - {fileID: 1337120210}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &595582597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595582591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb0bec555d251a42a05856aa33295d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitzone: {fileID: 1337120210}
 --- !u!1 &1337120209
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,7 +593,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1593446393}
   m_Father: {fileID: 595582596}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &1337120211
@@ -615,12 +630,87 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.00060635805, y: -0.0029950738}
-  m_Size: {x: 2.78, y: 0.99601686}
+  m_Size: {x: 3.88, y: 0.99601686}
   m_Direction: 0
+--- !u!1 &1593446392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1593446393}
+  - component: {fileID: 1593446394}
+  m_Layer: 0
+  m_Name: Triangle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1593446393
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593446392}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1337120210}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &1593446394
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593446392}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 3.0613918, y: -5.0261583}
+  - {x: -3.0238972, y: -5.0119066}
+  - {x: -0.0024029016, y: 0}
+  - {x: 3.0848813, y: -5.0836005}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 191438841}
   - {fileID: 519420032}
   - {fileID: 595582596}
-  - {fileID: 191438841}
