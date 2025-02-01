@@ -5,51 +5,49 @@ using Unity.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-    Collider2D collider;
-    Rigidbody2D rigidbody;
-    public bool canJump;
-    float jumpForce;
-    public float jumpSpeed;
-    public float jumpMinusSpeed;
-    public int jumpTime;
-    [SerializeField] float moveSpeed;
+    [SerializeField] new Collider2D collider;
+    [SerializeField] new Rigidbody2D rigidbody;
+
+    public bool canDash = true;
+    public bool isDashing;
+    public float dashingPower = 200f;
+    public float dashingTime = 0.1f;
+    public float dashingCooldown = 0.35f;
+
+
+    public float moveSpeed;
     void Start()
     {
         collider = GetComponent<Collider2D>();
         rigidbody = GetComponent<Rigidbody2D>();
-        jumpForce = 1;
     }
 
     void Update()
     {
-        if (Input.GetAxis("Jump") != 0)
+
+
+        //-------------------------//
+        rigidbody.AddForce(new Vector2(Input.GetAxis("Horizontal") * moveSpeed, Input.GetAxis("Vertical") * moveSpeed));
+        //-------------------------//
+
+        if (Input.GetButton("Jump") && canDash)
         {
-            if (canJump)
-            {
-                //jumpForce = jumpSpeed;
-                //canJump = false;
-                StartCoroutine(Jump());
-                //rigidbody.AddForce(new Vector2(jumpSpeed, 0));
-            }
+            StartCoroutine(Dash());
         }
-        //-------------------------//
-        rigidbody.AddForce(new Vector2(Input.GetAxis("Horizontal") * moveSpeed * jumpForce, Input.GetAxis("Vertical") * moveSpeed * jumpForce));
-        //-------------------------//
+
     }
 
-    IEnumerator Jump()
+    IEnumerator Dash()
     {
-        canJump = false;
-        int c = 0;
-        jumpForce = jumpSpeed;
-        while (c < jumpTime)
-        {
-            c++;
-            jumpForce -= jumpMinusSpeed;
-            if (jumpForce <= 1) { jumpForce = 1; }
-            yield return new WaitForSeconds(1 / 60);
-        }
-        jumpForce = 1;
-        canJump = true;
+        canDash = false;
+        isDashing = true;
+        rigidbody.AddForce(new Vector2(Input.GetAxis("Horizontal") * moveSpeed * dashingPower, Input.GetAxis("Vertical") * moveSpeed * dashingPower));
+
+        yield return new WaitForSeconds(dashingTime);
+
+        isDashing = false;
+
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
     }
 }
